@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUploadRequest;
 class EditProducts extends Controller
 {
-    public function edit($id)
+    public function __invoke($id)
     {
         $nani = Products::whereId($id)->first();
         // dd($nani);

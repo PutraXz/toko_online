@@ -4,7 +4,11 @@ use App\Http\Controllers\Admin\DeleteProducts;
 use App\Http\Controllers\Admin\EditProducts;
 use App\Http\Controllers\Admin\ShowProducts as AdminShowProducts;
 use App\Http\Controllers\Admin\UploadProducts;
+use App\Http\Controllers\User\CheckShooping;
+use App\Http\Controllers\User\ConfirmShooping;
+use App\Http\Controllers\User\ProductDetail;
 use App\Http\Controllers\User\ShowProducts;
+use App\Http\Controllers\User\StoreShooping;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -34,11 +38,15 @@ Route::middleware('auth')->group(function () {
         Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
         Route::get('admin/product', AdminShowProducts::class)->name('product.show');
         Route::post('admin/product', UploadProducts::class)->name('product.upload');
-        Route::get('admin/product/{id}', [EditProducts::class, 'edit'])->name('product.edit');
+        Route::get('admin/product/{id}', EditProducts::class)->name('product.edit');
         Route::post('admin/product/{id}',[EditProducts::class, 'update'])->name('product.update');
         Route::delete('admin/product/{id}', DeleteProducts::class)->name('product.delete');
     });
     Route::group(['middleware' => 'check-level:user'], function (){
         Route::get('/product', ShowProducts::class);
+        Route::get('/product/{id}', ProductDetail::class)->name('user.detail');
+        Route::post('/product/{id}', StoreShooping::class);
+        Route::get('check-out', CheckShooping::class);
+        Route::get('confirm', ConfirmShooping::class);
     });
 });

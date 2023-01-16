@@ -10,7 +10,8 @@
                         <img src="{{url('products/'.$product->file)}}" alt="" >
                         <h5 class="mt-3 text-center" style="color:black">{{$product->title}}</h5>
                         <p class="text-center" style="color:black">{{$product->description}}</p>
-                        <button class="btn btn-warning d-block mx-auto">Order Now</button>
+                        <a href="{{route('user.detail',$product->id)}}">Detail</a>
+                        <button class="btn btn-warning d-block mx-auto" onlick="{{route('user.detail',$product->id)}}" type="button">Order Now</button>
                     </div>
                 </div>
                 @endforeach
