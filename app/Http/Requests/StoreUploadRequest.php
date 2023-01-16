@@ -28,7 +28,8 @@ class StoreUploadRequest extends FormRequest
             'price' => 'required',
             'description' => 'required',
             'category' => 'required',
-            'file' => 'required|image'
+            'file' => 'image',
+            'stock' => 'required'
         ];
     }
 }

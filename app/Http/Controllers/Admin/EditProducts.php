@@ -5,13 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Products;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\StoreUploadRequest;
 class EditProducts extends Controller
 {
-    public function __invoke($id)
+    public function edit($id)
     {
         $nani = Products::whereId($id)->first();
         // dd($nani);
         return view('admin.edit-product', compact('nani'));
+    }
+    public function update(StoreUploadRequest $request, $id){
+        $product = Products::find($id);
+        $reqEnd = $request->toArray();
+        $reqEnd['slug'] = str_slug($request->title);
+        $product->update($reqEnd);
+        return back();
     }
 }

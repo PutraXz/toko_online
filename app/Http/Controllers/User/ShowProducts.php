@@ -10,7 +10,7 @@ class ShowProducts extends Controller
 {
     public function __invoke()
     {
-        Products::all();
-        return view('users.products');
+       $products = Products::all();
+        return view('users.products', compact('products'));
     }
 }

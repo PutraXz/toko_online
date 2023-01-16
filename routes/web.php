@@ -34,7 +34,8 @@ Route::middleware('auth')->group(function () {
         Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
         Route::get('admin/product', AdminShowProducts::class)->name('product.show');
         Route::post('admin/product', UploadProducts::class)->name('product.upload');
-        Route::get('admin/product/{id}', EditProducts::class)->name('product.edit');
+        Route::get('admin/product/{id}', [EditProducts::class, 'edit'])->name('product.edit');
+        Route::post('admin/product/{id}',[EditProducts::class, 'update'])->name('product.update');
         Route::delete('admin/product/{id}', DeleteProducts::class)->name('product.delete');
     });
     Route::group(['middleware' => 'check-level:user'], function (){

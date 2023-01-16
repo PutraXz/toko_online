@@ -20,6 +20,7 @@
                         <tr>
                             <th>Name Product</th>
                             <th>Price</th>
+                            <th>Stock</th>
                             <th>Description</th>
                             <th>Category</th>
                             <th>Action</th>
@@ -32,21 +33,22 @@
                             <tr>
                                 <td>{{ $product->title }}</td>
                                 <td>{{ $product->price }}</td>
+                                <td>{{ $product->stock }}</td>
                                 <td>{{ $product->description }}</td>
                                 <td>{{ $product->category}}</td>
-                                <td><a href="{{route('product.edit',$product->id)}}">Edit</a> | 
+                                <td><a href="{{route('product.edit',$product->id)}}">Edit</a> |
                                 <form method="POST" action="{{ url('admin/product')}}/{{$product->id}}" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn hapus" onclick="return confirm('Hapus Data?')" style="color: #d31c4a;font-size:16px">Delete</button>
                                 </form> </td>
                             </tr>
-                            
+
                         @endforeach
                         </tbody>
                     </table>
 
-                    {{-- {{ $product->links() }} --}}       
+                    {{-- {{ $product->links() }} --}}
                 </div>
             </div>
         </div>
@@ -75,6 +77,10 @@
                             <div class="mb-3">
                                 <label for="" class="col-sm-2 col-form-label">Price</label>
                                 <input type="text" name="price"  class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="col-sm-2 col-form-label">Stock</label>
+                                <input type="number" name="stock"  class="form-control" min="1" max="99">
                             </div>
                             <div class="mb-3">
                                 <label for="" class="col-sm-2 col-form-label">Description</label>
